@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>换肤效果</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<div class="menu">
+		<ul>
+			<li><img src="images/icon1.png" alt="">获取课程</li>
+			<li><img src="images/icon2.png" alt="">添加属性</li>
+			<li><img src="images/icon3.png" alt="">刷新</li>
+			<li><img src="images/icon4.png" alt="">查看源代码</li>
+			<li><img src="images/icon5.png" alt="">复制</li>
+			<li><img src="images/icon6.png" alt="">粘贴</li>
+			<li><img src="images/icon7.png" alt="">更换皮肤</li>
+		</ul>
+	</div>
+	<div class="bgBox">
+		<i class="close"><img src="images/close.png" alt=""></i>
+		<ol>
+			<li><img src="images/1.jpg" alt="" change="images/bg1.jpg"></li>
+			<li><img src="images/2.jpg" alt="" change="images/bg2.jpg"></li>
+			<li><img src="images/3.jpg" alt="" change="images/bg3.jpg"></li>
+			<li><img src="images/4.jpg" alt="" change="images/bg4.jpg"></li>
+			<li><img src="images/5.jpg" alt="" change="images/bg5.jpg"></li>
+			<li><img src="images/6.jpg" alt="" change="images/bg6.jpg"></li>
+		</ol>
+	</div>
+</body>
+</html>
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//屏蔽右键菜单
+		document.oncontextmenu=function(){
+			return false;
+		}
+
+		$(document).mousedown(function(ev){
+			ev=ev||window.event;
+			var key=ev.which;
+			var top=ev.pageY;
+			var left=ev.pageX;
+			if(key==3){
+				
+				$(".menu").show().css({"left":left+"px","top":top+"px"});
+			}
+		});
+		//关闭右键菜单
+		$(document).click(function(){
+			$(".menu").hide();
+		});
+
+		$(".bgBox .close").click(function(){
+			$(".bgBox").hide();
+		})
+
+		
+		$(".menu ul li").click(function(){
+			var index=$(this).index();
+			if(index==6){
+				$(".bgBox").show();
+			}
+			if(index==2){
+				//页面刷新的代码
+				window.location.reload();
+			}
+		});
+
+		//换肤切换
+		$(".bgBox ol li").click(function(){
+			var index=$(this).find("img").attr("change");
+			$("body").css({
+				"background":"url("+index+")",
+				"backgroundSize":"cover"
+			});
+		});
+
+	})
+</script>
